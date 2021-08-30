@@ -1,0 +1,24 @@
+.wrapper {
+   max-width: 400px;
+  margin: 200px auto 0 auto;
+}
+.find-block{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 250px;
+  margin: 0 auto;
+  height: 180px;
+  justify-content: space-evenly;
+  input {
+    font-size: 20px;
+  }
+  button {
+    font-size: 20px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background: lightseagreen;
+    padding: 10px 16px;
+  }
+}
