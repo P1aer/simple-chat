@@ -1,12 +1,33 @@
-import React from "react"
+import React, { useState } from "react"
+import axios from "axios";
 
-function FindBlock() {
+function FindBlock({ onLogin }) {
+    const [form, setForm] = useState({
+        id: "",
+        name: ""
+    })
+    const [isLoading, setLoading] = useState(false)
+    const changeHandler = (ev) => {
+        setForm({...form,[ev.target.name]: ev.target.value})
+    }
+    const onSubmit = async (ev) => {
+        ev.preventDefault();
+        setLoading(true)
+       await axios.post('/rooms', {
+            roomId: form.id,
+            nickname: form.name
+        })
+        onLogin({
+            roomId: form.id,
+            nickname: form.name
+        })
+    }
    return (
-       <div className="find-block">
-           <input type="text" placeholder="Room ID"/>
-           <input type="text" placeholder="Nickname"/>
-           <button>Войти</button>
-       </div>
+       <form onSubmit={onSubmit} className="find-block">
+           <input required onChange={changeHandler} value={form.id} name={"id"} type="text" placeholder="Room ID"/>
+           <input required onChange={changeHandler} value={form.name} name={"name"} type="text" placeholder="Nickname"/>
+           <button disabled={isLoading} type="submit">{!isLoading? "Войти": "Входим"}</button>
+       </form>
    )
 }
 
